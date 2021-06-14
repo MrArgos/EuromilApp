@@ -45,7 +45,7 @@ namespace ServidorApostas
             catch (DbUpdateException)
             {
                 //Console.WriteLine("Error updating database -> \"ApostasService.cs\": line 35");
-                _logger.LogError("Error updating database -> \"ApostasService.cs\": line 35");
+                _logger.LogError("Error updating database -> \"ApostasService.cs\": RegistarAposta");
                 return await Task.FromResult(new Resultado { Sucesso = false });
             }
         }
@@ -55,5 +55,49 @@ namespace ServidorApostas
 
         //    return base.ListarApostas(request, context);
         //}
+
+        public override async Task<ListaApostas> ListarApostas(PedidoListaApostas request, ServerCallContext context)
+        {
+            List<Aposta> listaApostas = new List<Aposta>();
+
+            var user = await _db.Users.Where(x => x.Nome == request.Nome).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                var ap = _db.Bets.Where(x => x.UserID == user.Id).ToList();
+                if (ap != null)
+                {
+                    foreach (var a in ap)
+                    {
+                        var c = new Aposta { Nome = a.User.Nome, Chave = a.Chave, Data = a.DataRegisto };
+                        listaApostas.Add(c);
+                    }
+                }
+            }
+
+            ListaApostas listaResposta = new ListaApostas { Aposta = { listaApostas } };
+
+            return await Task.FromResult(listaResposta);
+        }
+
+        public override async Task<Resultado> ArquivarApostas(PedidoArquivar request, ServerCallContext context)
+        {
+
+            var apostasCorrentes = _db.Bets.Where(x => x.Arquivada == false).ToList();
+            foreach (var a in apostasCorrentes)
+            {
+                a.Arquivada = true;
+            }
+
+            try
+            {
+                await _db.SaveChangesAsync();
+                return await Task.FromResult(new Resultado { Sucesso = true });
+            }
+            catch (DbUpdateException)
+            {   
+                _logger.LogError("Error updating database -> \"ApostasService.cs\": ArquivarAposta");
+                return await Task.FromResult(new Resultado { Sucesso = false });
+            }
+        }
     }
 }
