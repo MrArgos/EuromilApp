@@ -1,0 +1,71 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "ClientGestor";
+
+service Apostas{
+    // Utilizador
+    rpc RegistarAposta (PedidoAposta) returns (Resultado);
+    rpc ListarApostas (PedidoListaApostas) returns (ListaApostas);
+
+    // Administrador do sistema
+    rpc ListarUtilizadores (PedidoListaUtilizadores) returns (ListaUtilizadores);
+    rpc ArquivarApostas (PedidoArquivar) returns (Resultado);
+
+    // Gestor do Sorteio
+    rpc RegistarChaveVencedora (ChaveVencedora) returns (Resultado);
+    rpc ListarApostasVencedoras (PedidoApostasVencedoras) returns (ListaApostasVencedoras);
+}
+
+// Mensagem genérica onde é definida as propriedades de uma aposta
+message Aposta {
+    string nome = 1;
+    string chave = 2;
+    string data = 3;
+}
+
+message Resultado {
+    bool sucesso = 1;
+}
+
+// Registar Aposta
+message PedidoAposta {
+    Aposta aposta = 1; // Utilizando "message Aposta"
+}
+
+// ListarApostas
+message PedidoListaApostas {
+   string nome = 1;    // nome do utilizador do qual pretendemos ver as apostas.
+}                               // se nenhum utiliador for definido, devolve as apostas todas
+
+message ListaApostas {
+    repeated Aposta aposta = 1;
+}
+
+// ListarUtilizadores
+message PedidoListaUtilizadores {   // mensagem sem campos
+
+}
+
+message ListaUtilizadores {    // devolve uma lista dos utilizadores registados
+    repeated string utilizador = 1;
+}
+
+// ArquivarAposta
+message PedidoArquivar {    // mensagem sem campos
+
+}
+
+// RegistarChavevencedora
+message ChaveVencedora {
+    string chave = 1;
+}
+
+// ListarApostasVencedoras
+message PedidoApostasVencedoras { // mensagem sem campos
+
+}
+
+message ListaApostasVencedoras {    // lista de apostas que correspondem à chave vencedora
+    repeated Aposta aposta = 1;
+}
+

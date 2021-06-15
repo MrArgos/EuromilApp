@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientUser", "ClientUser\Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientAdministrador", "ClientAdministrador\ClientAdministrador.csproj", "{4FBEFE58-475F-4D3E-8B70-8D5DB396F037}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientGestor", "ClientGestor\ClientGestor.csproj", "{DD7DACA4-0B7B-48C9-A811-F2FF429A8D95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4FBEFE58-475F-4D3E-8B70-8D5DB396F037}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FBEFE58-475F-4D3E-8B70-8D5DB396F037}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FBEFE58-475F-4D3E-8B70-8D5DB396F037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD7DACA4-0B7B-48C9-A811-F2FF429A8D95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD7DACA4-0B7B-48C9-A811-F2FF429A8D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD7DACA4-0B7B-48C9-A811-F2FF429A8D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD7DACA4-0B7B-48C9-A811-F2FF429A8D95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

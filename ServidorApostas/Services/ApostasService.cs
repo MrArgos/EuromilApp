@@ -58,7 +58,7 @@ namespace ServidorApostas
             if (request.Nome == "")
             {
                 bets = await _db.Bets.Include(b => b.User)
-                    .Where(x => x.Arquivada == false).ToListAsync();
+                    .Where(x => x.Arquivada == false && x.User.Nome != "Vencedora").ToListAsync();
             }
             else
             {
@@ -107,7 +107,9 @@ namespace ServidorApostas
         {
             List<string> userList = new List<string>();
             ListaUtilizadores lu = new ListaUtilizadores();
-            var users = await _db.Bets.Include(b => b.User).Where(x => x.Arquivada == false).Select(a => a.User.Nome).ToListAsync();
+            var users = await _db.Bets.Include(b => b.User)
+                .Where(x => x.Arquivada == false && x.User.Nome != "Vencedora")
+                .Select(a => a.User.Nome).ToListAsync();
             foreach (var u in users)
             {
                 lu.Utilizador.Add(u);
@@ -115,6 +117,37 @@ namespace ServidorApostas
 
             _logger.LogInformation("Admin requested current users. {0} users were returned.", users.Count());
             return await Task.FromResult(lu);
+        }
+
+        public override async Task<Resultado> RegistarChaveVencedora(ChaveVencedora request, ServerCallContext context)
+        {
+            var userVencedora = await _db.Users.FirstOrDefaultAsync(u => u.Nome == "Vencedora");
+            if (userVencedora == null)
+            {
+                userVencedora = new User { Nome = "Vencedora" };
+                _db.Add(userVencedora);
+            }
+            var apostaVencedora = new Bet
+            {
+                Chave = request.Chave,
+                DataRegisto = DateTime.Now.ToString(),
+                Arquivada = false,
+                User = userVencedora
+            };
+            _db.Add(apostaVencedora);
+
+            try
+            {
+                await _db.SaveChangesAsync();
+                _logger.LogInformation("Gestor registered winnig bet: {0}.", apostaVencedora.Chave);
+                return await Task.FromResult(new Resultado { Sucesso = true });
+            }
+            catch (DbUpdateException e)
+            {
+                _logger.LogError(e, "Error updating database -> \"ApostasService.cs\": RegistarChaveVencedora.");
+                return await Task.FromResult(new Resultado { Sucesso = false });
+            }
+ 
         }
     }
 }
