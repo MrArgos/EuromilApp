@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ServidorApostas
 {
-    public class ApostasService: Apostas.ApostasBase
+    public class ApostasService : Apostas.ApostasBase
     {
         private readonly ILogger<ApostasService> _logger;
         private readonly ApostasServerContext _db;
@@ -29,16 +29,17 @@ namespace ServidorApostas
                 user = new User { Nome = request.Aposta.Nome };
                 _db.Add(user);
             }
-            Bet aposta = new Bet { 
-                Chave = request.Aposta.Chave, 
-                DataRegisto = request.Aposta.Data, 
-                Arquivada = false, 
+            Bet aposta = new Bet
+            {
+                Chave = request.Aposta.Chave,
+                DataRegisto = request.Aposta.Data,
+                Arquivada = false,
                 User = user
             };
+            _db.Add(aposta);
 
             try
             {
-                _db.Add(aposta);
                 await _db.SaveChangesAsync();
                 _logger.LogInformation("User {0} registered key: {1}", user.Nome, aposta.Chave);
                 return await Task.FromResult(new Resultado { Sucesso = true });
@@ -75,10 +76,8 @@ namespace ServidorApostas
                 listaApostas.Add(ap);
             }
 
-            ListaApostas listaResposta = new ListaApostas { Aposta = { listaApostas } };
-
             _logger.LogInformation("Admin requested list of bets. {0} bets were returned.", bets.Count());
-            return await Task.FromResult(listaResposta);
+            return await Task.FromResult(new ListaApostas { Aposta = { listaApostas } });
         }
 
         public override async Task<Resultado> ArquivarApostas(PedidoArquivar request, ServerCallContext context)
@@ -97,7 +96,7 @@ namespace ServidorApostas
                 return await Task.FromResult(new Resultado { Sucesso = true });
             }
             catch (DbUpdateException e)
-            {   
+            {
                 _logger.LogError(e, "Error updating database -> \"ApostasService.cs\": ArquivarAposta");
                 return await Task.FromResult(new Resultado { Sucesso = false });
             }
@@ -105,34 +104,43 @@ namespace ServidorApostas
 
         public override async Task<ListaUtilizadores> ListarUtilizadores(PedidoListaUtilizadores request, ServerCallContext context)
         {
-            List<string> userList = new List<string>();
-            ListaUtilizadores lu = new ListaUtilizadores();
+            ListaUtilizadores userList = new ListaUtilizadores();
             var users = await _db.Bets.Include(b => b.User)
                 .Where(x => x.Arquivada == false && x.User.Nome != "Vencedora")
                 .Select(a => a.User.Nome).ToListAsync();
             foreach (var u in users)
             {
-                lu.Utilizador.Add(u);
+                userList.Utilizador.Add(u);
             }
 
             _logger.LogInformation("Admin requested current users. {0} users were returned.", users.Count());
-            return await Task.FromResult(lu);
+            return await Task.FromResult(userList);
         }
 
         public override async Task<Resultado> RegistarChaveVencedora(ChaveVencedora request, ServerCallContext context)
         {
-            var userVencedora = await _db.Users.FirstOrDefaultAsync(u => u.Nome == "Vencedora");
-            if (userVencedora == null)
+            var existeChaveVencedora = await _db.Bets.Include(x => x.User)
+                .Where(b => b.Arquivada == false)
+                .AnyAsync(u => u.User.Nome == "Vencedora");
+            if (existeChaveVencedora)
             {
-                userVencedora = new User { Nome = "Vencedora" };
-                _db.Add(userVencedora);
+                _logger.LogError("Gestor tried to register winning key, but there already exists an unarchived winning key.");
+                return await Task.FromResult(new Resultado { Sucesso = false });
             }
+
+            var userChaveVencedora = await _db.Users.FirstOrDefaultAsync(u => u.Nome == "Vencedora");
+            if (userChaveVencedora == null)
+            {
+                userChaveVencedora = new User { Nome = "Vencedora" };
+                _db.Add(userChaveVencedora);
+            }
+
             var apostaVencedora = new Bet
             {
                 Chave = request.Chave,
                 DataRegisto = DateTime.Now.ToString(),
                 Arquivada = false,
-                User = userVencedora
+                User = userChaveVencedora
             };
             _db.Add(apostaVencedora);
 
@@ -147,7 +155,28 @@ namespace ServidorApostas
                 _logger.LogError(e, "Error updating database -> \"ApostasService.cs\": RegistarChaveVencedora.");
                 return await Task.FromResult(new Resultado { Sucesso = false });
             }
- 
+        }
+
+        public override async Task<ListaApostasVencedoras> ListarApostasVencedoras(PedidoApostasVencedoras request, ServerCallContext context)
+        {
+            var apostaVencedora = await _db.Bets.Include(x => x.User)
+                .Where(b => b.User.Nome == "Vencedora")
+                .FirstOrDefaultAsync(b => b.Arquivada == false);
+
+            var apostas = await _db.Bets.Include(x => x.User)
+                .Where(a => a.Arquivada == false
+                    && a.User.Nome != "Vencedora"
+                    && a.Chave == apostaVencedora.Chave)
+                        .ToListAsync();
+
+            List<Aposta> apostasLista = new List<Aposta>();
+            foreach (var a in apostas)
+            {
+                apostasLista.Add(new Aposta { Chave = a.Chave, Data = a.DataRegisto, Nome = a.User.Nome });
+            }
+
+            _logger.LogInformation("Gestor requested winning keys. {0} keys were returned.", apostasLista.Count());
+            return await Task.FromResult(new ListaApostasVencedoras { Aposta = { apostasLista } });
         }
     }
 }

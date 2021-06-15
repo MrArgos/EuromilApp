@@ -20,7 +20,7 @@ namespace ClientUser
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Aposta aposta = new Aposta { Nome = textBox1.Text, Chave = "1 2 23 4 51 + 6 7", Data = DateTime.Now.ToString() };
+            Aposta aposta = new Aposta { Nome = textBox1.Text, Chave = "1 2 3 4 5 + 6 7", Data = DateTime.Now.ToString() };
 
             PedidoAposta p = new PedidoAposta { Aposta = aposta };
 
