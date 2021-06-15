@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClientAdministrador
 {
-    public partial class FormListarApostas : Form
+    public partial class FormListarUtilizadores : Form
     {
-        public FormListarApostas()
+        public FormListarUtilizadores()
         {
             InitializeComponent();
 
@@ -20,11 +20,11 @@ namespace ClientAdministrador
             {
                 using var channel = GrpcChannel.ForAddress("https://localhost:5001");
                 var client = new Apostas.ApostasClient(channel);
-                var reply = client.ListarApostas(new PedidoListaApostas { Nome = "" });
+                var reply = client.ListarUtilizadores(new PedidoListaUtilizadores());
 
-                foreach (var aposta in reply.Aposta)
+                foreach (var user in reply.Utilizador)
                 {
-                    listViewListarApostas.Items.Add(new ListViewItem(new[] {  aposta.Chave, aposta.Nome, aposta.Data }));
+                    listViewUtilizadores.Items.Add(new ListViewItem(new[] { user }));
                 }
             }
             catch (RpcException)

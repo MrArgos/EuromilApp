@@ -38,8 +38,14 @@ namespace ClientAdministrador
 
         private void buttonListarApostas_Click(object sender, EventArgs e)
         {
-            FormListarApostas formListar = new FormListarApostas();
-            formListar.ShowDialog();
+            FormListarApostas fListarApostas = new FormListarApostas();
+            fListarApostas.ShowDialog();
+        }
+
+        private void buttonListarUtilizadores_Click(object sender, EventArgs e)
+        {
+            FormListarUtilizadores fListarUtilizadores = new FormListarUtilizadores();
+            fListarUtilizadores.ShowDialog();
         }
     }
 }

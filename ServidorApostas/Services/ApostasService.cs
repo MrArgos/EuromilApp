@@ -40,42 +40,44 @@ namespace ServidorApostas
             {
                 _db.Add(aposta);
                 await _db.SaveChangesAsync();
+                _logger.LogInformation("User {0} registered key: {1}", user.Nome, aposta.Chave);
                 return await Task.FromResult(new Resultado { Sucesso = true });
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {
-                //Console.WriteLine("Error updating database -> \"ApostasService.cs\": line 35");
-                _logger.LogError("Error updating database -> \"ApostasService.cs\": RegistarAposta");
+                _logger.LogError(e, "Error updating database -> \"ApostasService.cs\": RegistarAposta");
                 return await Task.FromResult(new Resultado { Sucesso = false });
             }
         }
 
-        //public override Task<ListaApostas> ListarApostas(PedidoListaApostas request, ServerCallContext context)
-        //{
-
-        //    return base.ListarApostas(request, context);
-        //}
-
         public override async Task<ListaApostas> ListarApostas(PedidoListaApostas request, ServerCallContext context)
         {
             List<Aposta> listaApostas = new List<Aposta>();
+            List<Bet> bets = new List<Bet>();
 
-            var user = await _db.Users.Where(x => x.Nome == request.Nome).FirstOrDefaultAsync();
-            if (user != null)
+            if (request.Nome == "")
             {
-                var ap = _db.Bets.Where(x => x.UserID == user.Id).ToList();
-                if (ap != null)
+                bets = await _db.Bets.Include(b => b.User)
+                    .Where(x => x.Arquivada == false).ToListAsync();
+            }
+            else
+            {
+                var user = await _db.Users.Where(x => x.Nome == request.Nome).FirstOrDefaultAsync();
+                if (user != null)
                 {
-                    foreach (var a in ap)
-                    {
-                        var c = new Aposta { Nome = a.User.Nome, Chave = a.Chave, Data = a.DataRegisto };
-                        listaApostas.Add(c);
-                    }
+                    bets = await _db.Bets.Include(b => b.User)
+                        .Where(x => x.UserID == user.Id).ToListAsync();
                 }
+            }
+            foreach (var b in bets)
+            {
+                var ap = new Aposta { Nome = b.User.Nome, Chave = b.Chave, Data = b.DataRegisto };
+                listaApostas.Add(ap);
             }
 
             ListaApostas listaResposta = new ListaApostas { Aposta = { listaApostas } };
 
+            _logger.LogInformation("Admin requested list of bets. {0} bets were returned.", bets.Count());
             return await Task.FromResult(listaResposta);
         }
 
@@ -83,21 +85,36 @@ namespace ServidorApostas
         {
 
             var apostasCorrentes = _db.Bets.Where(x => x.Arquivada == false).ToList();
-            foreach (var a in apostasCorrentes)
+            foreach (var ap in apostasCorrentes)
             {
-                a.Arquivada = true;
+                ap.Arquivada = true;
             }
 
             try
             {
                 await _db.SaveChangesAsync();
+                _logger.LogInformation("Admin requested to archive bets. {0} bets were archived.", apostasCorrentes.Count());
                 return await Task.FromResult(new Resultado { Sucesso = true });
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {   
-                _logger.LogError("Error updating database -> \"ApostasService.cs\": ArquivarAposta");
+                _logger.LogError(e, "Error updating database -> \"ApostasService.cs\": ArquivarAposta");
                 return await Task.FromResult(new Resultado { Sucesso = false });
             }
+        }
+
+        public override async Task<ListaUtilizadores> ListarUtilizadores(PedidoListaUtilizadores request, ServerCallContext context)
+        {
+            List<string> userList = new List<string>();
+            ListaUtilizadores lu = new ListaUtilizadores();
+            var users = await _db.Bets.Include(b => b.User).Where(x => x.Arquivada == false).Select(a => a.User.Nome).ToListAsync();
+            foreach (var u in users)
+            {
+                lu.Utilizador.Add(u);
+            }
+
+            _logger.LogInformation("Admin requested current users. {0} users were returned.", users.Count());
+            return await Task.FromResult(lu);
         }
     }
 }

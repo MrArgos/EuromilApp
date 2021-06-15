@@ -31,16 +31,16 @@ namespace ClientAdministrador
         {
             this.buttonArquivar = new System.Windows.Forms.Button();
             this.buttonListarApostas = new System.Windows.Forms.Button();
+            this.buttonListarUtilizadores = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonArquivar
             // 
-            this.buttonArquivar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonArquivar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonArquivar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonArquivar.Location = new System.Drawing.Point(92, 36);
+            this.buttonArquivar.Location = new System.Drawing.Point(72, 36);
             this.buttonArquivar.Name = "buttonArquivar";
-            this.buttonArquivar.Size = new System.Drawing.Size(152, 23);
+            this.buttonArquivar.Size = new System.Drawing.Size(203, 28);
             this.buttonArquivar.TabIndex = 0;
             this.buttonArquivar.Text = "Arquivar Apostas";
             this.buttonArquivar.UseVisualStyleBackColor = true;
@@ -48,22 +48,33 @@ namespace ClientAdministrador
             // 
             // buttonListarApostas
             // 
-            this.buttonListarApostas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonListarApostas.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonListarApostas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonListarApostas.Location = new System.Drawing.Point(91, 81);
+            this.buttonListarApostas.Location = new System.Drawing.Point(71, 81);
             this.buttonListarApostas.Name = "buttonListarApostas";
-            this.buttonListarApostas.Size = new System.Drawing.Size(153, 23);
+            this.buttonListarApostas.Size = new System.Drawing.Size(204, 28);
             this.buttonListarApostas.TabIndex = 1;
             this.buttonListarApostas.Text = "Ver Apostas Registadas";
             this.buttonListarApostas.UseVisualStyleBackColor = true;
             this.buttonListarApostas.Click += new System.EventHandler(this.buttonListarApostas_Click);
             // 
+            // buttonListarUtilizadores
+            // 
+            this.buttonListarUtilizadores.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonListarUtilizadores.Location = new System.Drawing.Point(72, 126);
+            this.buttonListarUtilizadores.Name = "buttonListarUtilizadores";
+            this.buttonListarUtilizadores.Size = new System.Drawing.Size(203, 28);
+            this.buttonListarUtilizadores.TabIndex = 2;
+            this.buttonListarUtilizadores.Text = "Ver Utilizadores Registados";
+            this.buttonListarUtilizadores.UseVisualStyleBackColor = true;
+            this.buttonListarUtilizadores.Click += new System.EventHandler(this.buttonListarUtilizadores_Click);
+            // 
             // FormAdministrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 136);
+            this.ClientSize = new System.Drawing.Size(359, 212);
+            this.Controls.Add(this.buttonListarUtilizadores);
             this.Controls.Add(this.buttonListarApostas);
             this.Controls.Add(this.buttonArquivar);
             this.Name = "FormAdministrador";
@@ -76,6 +87,7 @@ namespace ClientAdministrador
 
         private System.Windows.Forms.Button buttonArquivar;
         private System.Windows.Forms.Button buttonListarApostas;
+        private System.Windows.Forms.Button buttonListarUtilizadores;
     }
 }
 

@@ -30,8 +30,8 @@ namespace ClientAdministrador
         private void InitializeComponent()
         {
             this.listViewListarApostas = new System.Windows.Forms.ListView();
-            this.columnHeaderNome = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderChave = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderNome = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderData = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
@@ -41,8 +41,8 @@ namespace ClientAdministrador
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewListarApostas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderNome,
             this.columnHeaderChave,
+            this.columnHeaderNome,
             this.columnHeaderData});
             this.listViewListarApostas.GridLines = true;
             this.listViewListarApostas.HideSelection = false;
@@ -53,15 +53,15 @@ namespace ClientAdministrador
             this.listViewListarApostas.UseCompatibleStateImageBehavior = false;
             this.listViewListarApostas.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeaderNome
-            // 
-            this.columnHeaderNome.Text = "Nome";
-            this.columnHeaderNome.Width = 150;
-            // 
             // columnHeaderChave
             // 
             this.columnHeaderChave.Text = "Chave";
             this.columnHeaderChave.Width = 150;
+            // 
+            // columnHeaderNome
+            // 
+            this.columnHeaderNome.Text = "Nome";
+            this.columnHeaderNome.Width = 150;
             // 
             // columnHeaderData
             // 
@@ -75,7 +75,7 @@ namespace ClientAdministrador
             this.ClientSize = new System.Drawing.Size(480, 454);
             this.Controls.Add(this.listViewListarApostas);
             this.Name = "FormListarApostas";
-            this.Text = "FormListarApostas";
+            this.Text = "Lista de Apostas Correntes";
             this.ResumeLayout(false);
 
         }
