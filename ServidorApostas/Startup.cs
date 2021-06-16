@@ -43,7 +43,6 @@ namespace ServidorApostas
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
                 endpoints.MapGrpcService<ApostasService>();
 
                 endpoints.MapGet("/", async context =>
