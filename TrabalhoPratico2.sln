@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServidorApostas", "ServidorApostas\ServidorApostas.csproj", "{5A284F06-CA4F-495E-B874-52CC45CF0C8C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientUtilizador", "ClientUser\ClientUtilizador.csproj", "{CEB32DD7-BC29-4D72-889B-141F132CB13C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientUtilizador", "ClientUtilizador\ClientUtilizador.csproj", "{CEB32DD7-BC29-4D72-889B-141F132CB13C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientAdministrador", "ClientAdministrador\ClientAdministrador.csproj", "{4FBEFE58-475F-4D3E-8B70-8D5DB396F037}"
 EndProject
