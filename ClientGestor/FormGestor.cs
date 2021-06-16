@@ -19,14 +19,18 @@ namespace ClientGestor
 
         private void buttonRegistarChaveVencedora_Click(object sender, EventArgs e)
         {
-            FormRegistarChaveVencedora fRegistar = new FormRegistarChaveVencedora();
-            fRegistar.ShowDialog();
+            Hide();
+            using (FormRegistarChaveVencedora fr = new FormRegistarChaveVencedora())
+                fr.ShowDialog();
+            Show();
         }
 
         private void buttonListarVencedores_Click(object sender, EventArgs e)
         {
-            FormListarVencedores fVencedores = new FormListarVencedores();
-            fVencedores.ShowDialog();
+            Hide();
+            using (FormListarVencedores fv = new FormListarVencedores())
+                fv.ShowDialog();
+            Show();
         }
     }
 }

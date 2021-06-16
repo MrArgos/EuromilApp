@@ -59,7 +59,8 @@ namespace ServidorApostas
             if (request.Nome == "")
             {
                 bets = await _db.Bets.Include(b => b.User)
-                    .Where(x => x.Arquivada == false && x.User.Nome != "Vencedora").ToListAsync();
+                    .Where(x => x.Arquivada == false && x.User.Nome != "Vencedora")
+                    .OrderByDescending(x => x.DataRegisto).ToListAsync();
             }
             else
             {
@@ -67,7 +68,8 @@ namespace ServidorApostas
                 if (user != null)
                 {
                     bets = await _db.Bets.Include(b => b.User)
-                        .Where(x => x.UserID == user.Id).ToListAsync();
+                        .Where(x => x.UserID == user.Id)
+                        .OrderByDescending(x => x.DataRegisto).ToListAsync();
                 }
             }
             foreach (var b in bets)
@@ -107,7 +109,8 @@ namespace ServidorApostas
             ListaUtilizadores userList = new ListaUtilizadores();
             var users = await _db.Bets.Include(b => b.User)
                 .Where(x => x.Arquivada == false && x.User.Nome != "Vencedora")
-                .Select(a => a.User.Nome).ToListAsync();
+                .Select(a => a.User.Nome).Distinct().ToListAsync();
+
             foreach (var u in users)
             {
                 userList.Utilizador.Add(u);
@@ -124,7 +127,7 @@ namespace ServidorApostas
                 .AnyAsync(u => u.User.Nome == "Vencedora");
             if (existeChaveVencedora)
             {
-                _logger.LogError("Gestor tried to register winning key, but there already exists an unarchived winning key.");
+                _logger.LogWarning("Gestor tried to register winning key, but there already exists an unarchived winning key.");
                 return await Task.FromResult(new Resultado { Sucesso = false });
             }
 
@@ -163,11 +166,15 @@ namespace ServidorApostas
                 .Where(b => b.User.Nome == "Vencedora")
                 .FirstOrDefaultAsync(b => b.Arquivada == false);
 
-            var apostas = await _db.Bets.Include(x => x.User)
-                .Where(a => a.Arquivada == false
-                    && a.User.Nome != "Vencedora"
-                    && a.Chave == apostaVencedora.Chave)
-                        .ToListAsync();
+            List<Bet> apostas = new List<Bet>();
+            if (apostaVencedora != null)
+            {
+                apostas = await _db.Bets.Include(x => x.User)
+                        .Where(a => a.Arquivada == false
+                            && a.User.Nome != "Vencedora"
+                            && a.Chave == apostaVencedora.Chave)
+                                .OrderByDescending(x => x.DataRegisto).ToListAsync(); 
+            }
 
             List<Aposta> apostasLista = new List<Aposta>();
             foreach (var a in apostas)

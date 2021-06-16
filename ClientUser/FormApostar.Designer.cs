@@ -39,6 +39,7 @@ namespace ClientUser
             this.textBoxEstrela1 = new System.Windows.Forms.TextBox();
             this.textBoxEstrela2 = new System.Windows.Forms.TextBox();
             this.buttonApostar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxNumero1
@@ -110,19 +111,29 @@ namespace ClientUser
             // 
             // buttonApostar
             // 
-            this.buttonApostar.Location = new System.Drawing.Point(125, 85);
+            this.buttonApostar.Location = new System.Drawing.Point(66, 85);
             this.buttonApostar.Name = "buttonApostar";
-            this.buttonApostar.Size = new System.Drawing.Size(75, 23);
+            this.buttonApostar.Size = new System.Drawing.Size(196, 23);
             this.buttonApostar.TabIndex = 9;
-            this.buttonApostar.Text = "Apostar";
+            this.buttonApostar.Text = "Registar Aposta";
             this.buttonApostar.UseVisualStyleBackColor = true;
             this.buttonApostar.Click += new System.EventHandler(this.buttonApostar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(216, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(15, 15);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "+";
             // 
             // FormApostar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(333, 129);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonApostar);
             this.Controls.Add(this.textBoxEstrela2);
             this.Controls.Add(this.textBoxEstrela1);
@@ -152,5 +163,6 @@ namespace ClientUser
         private System.Windows.Forms.TextBox textBoxEstrela1;
         private System.Windows.Forms.TextBox textBoxEstrela2;
         private System.Windows.Forms.Button buttonApostar;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -25,9 +25,8 @@ namespace ClientAdministrador
             {
                 using var channel = GrpcChannel.ForAddress("https://localhost:5001");
                 var client = new Apostas.ApostasClient(channel);
-
                 var reply = client.ArquivarApostas(new PedidoArquivar());
-                MessageBox.Show(reply.Sucesso ? "Sucesso" : "Erro");
+                MessageBox.Show(reply.Sucesso ? "Apostas foram arquivadas com Sucesso." : "Erro a arquivar apostas.");
             }
             catch (RpcException)
             {
@@ -38,14 +37,18 @@ namespace ClientAdministrador
 
         private void buttonListarApostas_Click(object sender, EventArgs e)
         {
-            FormListarApostas fListarApostas = new FormListarApostas();
-            fListarApostas.ShowDialog();
+            Hide();
+            using (FormListarApostas fla = new FormListarApostas())
+                fla.ShowDialog();
+            Show();
         }
 
         private void buttonListarUtilizadores_Click(object sender, EventArgs e)
         {
-            FormListarUtilizadores fListarUtilizadores = new FormListarUtilizadores();
-            fListarUtilizadores.ShowDialog();
+            Hide();
+            using (FormListarUtilizadores flu = new FormListarUtilizadores())
+                flu.ShowDialog();
+            Show();
         }
     }
 }

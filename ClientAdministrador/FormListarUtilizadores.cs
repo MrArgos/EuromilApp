@@ -31,7 +31,6 @@ namespace ClientAdministrador
             {
                 MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde ou contacte o administrador do serviço.",
                     "Erro no serviço gRPC", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
             }
         }
     }

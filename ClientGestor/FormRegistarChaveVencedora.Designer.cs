@@ -29,67 +29,67 @@ namespace ClientGestor
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBoxNumero1 = new System.Windows.Forms.TextBox();
+            this.textBoxNumero2 = new System.Windows.Forms.TextBox();
+            this.textBoxNumero3 = new System.Windows.Forms.TextBox();
+            this.textBoxNumero4 = new System.Windows.Forms.TextBox();
+            this.textBoxNumero5 = new System.Windows.Forms.TextBox();
+            this.textBoxEstrela1 = new System.Windows.Forms.TextBox();
+            this.textBoxEstrela2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonRegistar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // textBoxNumero1
             // 
-            this.textBox1.Location = new System.Drawing.Point(28, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(24, 23);
-            this.textBox1.TabIndex = 0;
+            this.textBoxNumero1.Location = new System.Drawing.Point(28, 45);
+            this.textBoxNumero1.Name = "textBoxNumero1";
+            this.textBoxNumero1.Size = new System.Drawing.Size(24, 23);
+            this.textBoxNumero1.TabIndex = 0;
             // 
-            // textBox2
+            // textBoxNumero2
             // 
-            this.textBox2.Location = new System.Drawing.Point(58, 45);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(24, 23);
-            this.textBox2.TabIndex = 1;
+            this.textBoxNumero2.Location = new System.Drawing.Point(58, 45);
+            this.textBoxNumero2.Name = "textBoxNumero2";
+            this.textBoxNumero2.Size = new System.Drawing.Size(24, 23);
+            this.textBoxNumero2.TabIndex = 1;
             // 
-            // textBox3
+            // textBoxNumero3
             // 
-            this.textBox3.Location = new System.Drawing.Point(88, 45);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(24, 23);
-            this.textBox3.TabIndex = 2;
+            this.textBoxNumero3.Location = new System.Drawing.Point(88, 45);
+            this.textBoxNumero3.Name = "textBoxNumero3";
+            this.textBoxNumero3.Size = new System.Drawing.Size(24, 23);
+            this.textBoxNumero3.TabIndex = 2;
             // 
-            // textBox4
+            // textBoxNumero4
             // 
-            this.textBox4.Location = new System.Drawing.Point(118, 45);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(24, 23);
-            this.textBox4.TabIndex = 3;
+            this.textBoxNumero4.Location = new System.Drawing.Point(118, 45);
+            this.textBoxNumero4.Name = "textBoxNumero4";
+            this.textBoxNumero4.Size = new System.Drawing.Size(24, 23);
+            this.textBoxNumero4.TabIndex = 3;
             // 
-            // textBox5
+            // textBoxNumero5
             // 
-            this.textBox5.Location = new System.Drawing.Point(148, 45);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(24, 23);
-            this.textBox5.TabIndex = 4;
+            this.textBoxNumero5.Location = new System.Drawing.Point(148, 45);
+            this.textBoxNumero5.Name = "textBoxNumero5";
+            this.textBoxNumero5.Size = new System.Drawing.Size(24, 23);
+            this.textBoxNumero5.TabIndex = 4;
             // 
-            // textBox6
+            // textBoxEstrela1
             // 
-            this.textBox6.Location = new System.Drawing.Point(199, 45);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(24, 23);
-            this.textBox6.TabIndex = 5;
+            this.textBoxEstrela1.Location = new System.Drawing.Point(199, 45);
+            this.textBoxEstrela1.Name = "textBoxEstrela1";
+            this.textBoxEstrela1.Size = new System.Drawing.Size(24, 23);
+            this.textBoxEstrela1.TabIndex = 5;
             // 
-            // textBox7
+            // textBoxEstrela2
             // 
-            this.textBox7.Location = new System.Drawing.Point(229, 45);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(24, 23);
-            this.textBox7.TabIndex = 6;
+            this.textBoxEstrela2.Location = new System.Drawing.Point(229, 45);
+            this.textBoxEstrela2.Name = "textBoxEstrela2";
+            this.textBoxEstrela2.Size = new System.Drawing.Size(24, 23);
+            this.textBoxEstrela2.TabIndex = 6;
             // 
             // label1
             // 
@@ -137,13 +137,13 @@ namespace ClientGestor
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxEstrela2);
+            this.Controls.Add(this.textBoxEstrela1);
+            this.Controls.Add(this.textBoxNumero5);
+            this.Controls.Add(this.textBoxNumero4);
+            this.Controls.Add(this.textBoxNumero3);
+            this.Controls.Add(this.textBoxNumero2);
+            this.Controls.Add(this.textBoxNumero1);
             this.Name = "FormRegistarChaveVencedora";
             this.Text = "Registar Chave Vencedora";
             this.ResumeLayout(false);
@@ -153,13 +153,13 @@ namespace ClientGestor
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBoxNumero1;
+        private System.Windows.Forms.TextBox textBoxNumero2;
+        private System.Windows.Forms.TextBox textBoxNumero3;
+        private System.Windows.Forms.TextBox textBoxNumero4;
+        private System.Windows.Forms.TextBox textBoxNumero5;
+        private System.Windows.Forms.TextBox textBoxEstrela1;
+        private System.Windows.Forms.TextBox textBoxEstrela2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

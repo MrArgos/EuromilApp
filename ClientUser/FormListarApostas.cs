@@ -8,11 +8,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ClientAdministrador
+namespace ClientUser
 {
     public partial class FormListarApostas : Form
     {
-        public FormListarApostas()
+        public FormListarApostas(string userName)
         {
             InitializeComponent();
 
@@ -20,11 +20,11 @@ namespace ClientAdministrador
             {
                 using var channel = GrpcChannel.ForAddress("https://localhost:5001");
                 var client = new Apostas.ApostasClient(channel);
-                var reply = client.ListarApostas(new PedidoListaApostas { Nome = "" });
+                var reply = client.ListarApostas(new PedidoListaApostas { Nome = userName });
 
-                foreach (var aposta in reply.Aposta)
+                foreach (var r in reply.Aposta)
                 {
-                    listViewListarApostas.Items.Add(new ListViewItem(new[] {  aposta.Chave, aposta.Nome, aposta.Data }));
+                    listViewApostas.Items.Add(new ListViewItem(new[] { r.Nome, r.Chave, r.Data }));
                 }
             }
             catch (RpcException)
