@@ -1,4 +1,10 @@
-﻿using Grpc.Core;
+﻿/* Trabalho Realizado por:
+ * João Costa       al59259
+ * Pedro Monteiro   al68708
+ * Luis Ribeiro     al69605
+ */
+
+using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ServidorApostas.Data;
