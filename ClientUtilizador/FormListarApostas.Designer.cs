@@ -1,5 +1,5 @@
 ﻿
-namespace ClientUser
+namespace ClientUtilizador
 {
     partial class FormListarApostas
     {

@@ -1,23 +1,22 @@
-﻿using Grpc.Core;
-using Grpc.Net.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using ClientUser;
+using Grpc.Core;
+using Grpc.Net.Client;
 
-namespace ClientUser
+namespace ClientUtilizador
 {
     public partial class FormApostar : Form
     {
         private string userName;
-        public FormApostar(string _Username)
+        private GrpcChannel channel;
+        public FormApostar(string _Username, GrpcChannel _channel)
         {
             InitializeComponent();
             userName = _Username;
+            channel = _channel;
         }
 
         private void buttonApostar_Click(object sender, EventArgs e)
@@ -35,7 +34,6 @@ namespace ClientUser
 
                 try
                 {
-                    using var channel = GrpcChannel.ForAddress("https://localhost:5001");
                     var client = new Apostas.ApostasClient(channel);
                     var reply = client.RegistarAposta(p);
                     MessageBox.Show(reply.Sucesso ? "Chave Registada com Sucesso." : "Erro a registar chave.");
