@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Net.Http;
-using System.Text;
 using System.Windows.Forms;
 using Grpc.Core;
 using Grpc.Net.Client;
 
-namespace ClientUser
+namespace ClientUtilizador
 {
 
     public partial class FormUtilizador : Form

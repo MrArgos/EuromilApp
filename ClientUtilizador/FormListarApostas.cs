@@ -15,14 +15,6 @@ namespace ClientUtilizador
 
             try
             {
-                
-                //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-                //var httpHandler = new HttpClientHandler();
-                //httpHandler.ServerCertificateCustomValidationCallback =
-                //    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                //// Endereço IP do servidor
-                //using var channel = GrpcChannel.ForAddress(ipAdd,
-                //    new GrpcChannelOptions { HttpHandler = httpHandler });
                 var client = new Apostas.ApostasClient(channel);
                 var reply = client.ListarApostas(new PedidoListaApostas { Nome = userName });
 
