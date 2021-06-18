@@ -85,6 +85,7 @@ namespace ClientUtilizador
             this.Controls.Add(this.labelNome);
             this.Controls.Add(this.label1);
             this.Name = "FormMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cliente Utilizador: Área Pessoal";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -63,6 +63,7 @@ namespace ClientGestor
             this.Controls.Add(this.buttonListarVencedores);
             this.Controls.Add(this.buttonRegistarChaveVencedora);
             this.Name = "FormGestor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cliente de Gestão";
             this.ResumeLayout(false);
 

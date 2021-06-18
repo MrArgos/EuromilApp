@@ -130,6 +130,7 @@ namespace ClientUtilizador
             // 
             // FormApostar
             // 
+            this.AcceptButton = this.buttonApostar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(333, 129);
@@ -145,6 +146,7 @@ namespace ClientUtilizador
             this.Controls.Add(this.textBoxNumero2);
             this.Controls.Add(this.textBoxNumero1);
             this.Name = "FormApostar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Apostar";
             this.ResumeLayout(false);
             this.PerformLayout();

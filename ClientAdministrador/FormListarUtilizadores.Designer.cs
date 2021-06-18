@@ -61,6 +61,7 @@ namespace ClientAdministrador
             this.ClientSize = new System.Drawing.Size(229, 359);
             this.Controls.Add(this.listViewUtilizadores);
             this.Name = "FormListarUtilizadores";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lista Utilizadores";
             this.ResumeLayout(false);
 

@@ -78,6 +78,7 @@ namespace ClientAdministrador
             this.Controls.Add(this.buttonListarApostas);
             this.Controls.Add(this.buttonArquivar);
             this.Name = "FormAdministrador";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cliente Administrador";
             this.ResumeLayout(false);
 

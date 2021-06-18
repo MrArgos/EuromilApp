@@ -75,6 +75,7 @@ namespace ClientGestor
             this.ClientSize = new System.Drawing.Size(629, 361);
             this.Controls.Add(this.listViewVencedores);
             this.Name = "FormListarVencedores";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lista de Vencedores";
             this.ResumeLayout(false);
 

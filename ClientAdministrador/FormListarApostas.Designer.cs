@@ -75,6 +75,7 @@ namespace ClientAdministrador
             this.ClientSize = new System.Drawing.Size(480, 454);
             this.Controls.Add(this.listViewListarApostas);
             this.Name = "FormListarApostas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lista de Apostas Correntes";
             this.ResumeLayout(false);
 

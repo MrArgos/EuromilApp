@@ -130,6 +130,7 @@ namespace ClientGestor
             // 
             // FormRegistarChaveVencedora
             // 
+            this.AcceptButton = this.buttonRegistar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(286, 136);
@@ -145,6 +146,7 @@ namespace ClientGestor
             this.Controls.Add(this.textBoxNumero2);
             this.Controls.Add(this.textBoxNumero1);
             this.Name = "FormRegistarChaveVencedora";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Registar Chave Vencedora";
             this.ResumeLayout(false);
             this.PerformLayout();

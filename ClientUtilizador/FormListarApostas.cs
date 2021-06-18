@@ -1,9 +1,6 @@
-﻿using System;
-using System.Net.Http;
-using System.Windows.Forms;
-using ClientUser;
-using Grpc.Core;
+﻿using Grpc.Core;
 using Grpc.Net.Client;
+using System.Windows.Forms;
 
 namespace ClientUtilizador
 {

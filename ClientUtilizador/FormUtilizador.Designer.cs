@@ -62,6 +62,7 @@ namespace ClientUtilizador
             // 
             // FormUtilizador
             // 
+            this.AcceptButton = this.buttonEntrar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(350, 184);
@@ -69,6 +70,7 @@ namespace ClientUtilizador
             this.Controls.Add(this.textBoxNome);
             this.Controls.Add(this.buttonEntrar);
             this.Name = "FormUtilizador";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cliente Utilizador";
             this.ResumeLayout(false);
             this.PerformLayout();

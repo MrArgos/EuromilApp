@@ -75,6 +75,7 @@ namespace ClientUtilizador
             this.ClientSize = new System.Drawing.Size(630, 455);
             this.Controls.Add(this.listViewApostas);
             this.Name = "FormListarApostas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lista de Apostas";
             this.ResumeLayout(false);
 
