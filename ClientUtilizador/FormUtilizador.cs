@@ -14,38 +14,34 @@ namespace ClientUser
 
     public partial class FormUtilizador : Form
     {
-        
+        private GrpcChannel channel;
         public FormUtilizador()
         {
             InitializeComponent();
+
+            try
+            {
+                var httpHandler = new HttpClientHandler();
+                httpHandler.ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                channel = GrpcChannel.ForAddress("https://192.168.1.93:5001",
+                    new GrpcChannelOptions { HttpHandler = httpHandler });
+            }
+            catch (RpcException)
+            {
+                MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde ou contacte o administrador do serviço.",
+                                    "Erro no serviço gRPC", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void buttonEntrar_Click(object sender, EventArgs e)
         {
             if (textBoxNome.Text.Length >= 3 || textBoxNome.Text.Length < 50)
             {
-                try
-                {
-                    //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-                    var httpHandler = new HttpClientHandler();
-                    httpHandler.ServerCertificateCustomValidationCallback =
-                        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                    // Endereço IP do servidor
-                    using var channel = GrpcChannel.ForAddress("https://192.168.1.93:5001",
-                        new GrpcChannelOptions { HttpHandler = httpHandler });
-
-                    Hide();
-                    using (FormMenu fm = new FormMenu(textBoxNome.Text, channel))
-                        fm.ShowDialog();
-                    Show();
-                }
-                catch (RpcException exception)
-                {
-                    Console.WriteLine(exception);
-                    throw;
-                }
-
-                
+                Hide();
+                using (FormMenu fm = new FormMenu(textBoxNome.Text, channel))
+                    fm.ShowDialog();
+                Show();
             }
             else
             {

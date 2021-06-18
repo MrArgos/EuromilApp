@@ -12,13 +12,12 @@ namespace ClientAdministrador
 {
     public partial class FormListarApostas : Form
     {
-        public FormListarApostas()
+        public FormListarApostas(GrpcChannel channel)
         {
             InitializeComponent();
 
             try
             {
-                using var channel = GrpcChannel.ForAddress("https://localhost:5001");
                 var client = new Apostas.ApostasClient(channel);
                 var reply = client.ListarApostas(new PedidoListaApostas { Nome = "" });
 

@@ -13,9 +13,11 @@ namespace ClientGestor
 {
     public partial class FormRegistarChaveVencedora : Form
     {
-        public FormRegistarChaveVencedora()
+        private GrpcChannel channel;
+        public FormRegistarChaveVencedora(GrpcChannel _channel)
         {
             InitializeComponent();
+            channel = _channel;
         }
 
         private void buttonRegistar_Click(object sender, EventArgs e)
@@ -29,7 +31,6 @@ namespace ClientGestor
             {
                 try
                 {
-                    using var channel = GrpcChannel.ForAddress("https://localhost:5001");
                     var client = new Apostas.ApostasClient(channel);
                     var reply = client.RegistarChaveVencedora(new ChaveVencedora { Chave = chave });
                     MessageBox.Show(reply.Sucesso ? "Chave Registada com Sucesso" : "Erro a registar chave.");
