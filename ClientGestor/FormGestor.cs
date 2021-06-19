@@ -13,6 +13,7 @@ namespace ClientGestor
         {
             InitializeComponent();
 
+            // Criar o canal Grpc para ligação ao servidor
             try
             {
                 var httpHandler = new HttpClientHandler();
@@ -23,11 +24,13 @@ namespace ClientGestor
             }
             catch (RpcException)
             {
-                MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde ou contacte o administrador do serviço.",
+                MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde " +
+                                "ou contacte o administrador do serviço.",
                                     "Erro no serviço gRPC", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // Abrir janela para a Registar a Chave Vencedor
         private void buttonRegistarChaveVencedora_Click(object sender, EventArgs e)
         {
             Hide();
@@ -36,6 +39,7 @@ namespace ClientGestor
             Show();
         }
 
+        // Abrir janela para a Lista de Apostas Vencedoras
         private void buttonListarVencedores_Click(object sender, EventArgs e)
         {
             Hide();

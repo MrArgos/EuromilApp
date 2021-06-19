@@ -18,13 +18,15 @@ namespace ClientGestor
 
         private void buttonRegistar_Click(object sender, EventArgs e)
         {
+            // Verificar se há erros na conversão e ordenação da chave
             string chave = OrdenarChave();
             if (chave == "-1")
             {
-                MessageBox.Show("Chave não está no formato correto.", "Erro na chave", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Chave não está no formato correto.", "Erro na chave", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
-            {
+            {   // Se não houver, enviar informação para o servidor
                 try
                 {
                     var client = new Apostas.ApostasClient(channel);
@@ -33,12 +35,14 @@ namespace ClientGestor
                 }
                 catch (RpcException)
                 {
-                    MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde ou contacte o administrador do serviço.",
+                    MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde " +
+                                    "ou contacte o administrador do serviço.",
                          "Erro no serviço gRPC", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
+        // Verificar e ordenar Chave inserida pelo utilizador
         private string OrdenarChave()
         {
             int[] numeros = new int[5];
@@ -57,6 +61,7 @@ namespace ClientGestor
                 textBoxEstrela1,
                 textBoxEstrela2};
 
+            // Converter para INT os números inseridos pelo Gestor (string)
             foreach (var t in textBoxesNumeros)
             {
                 if (!Int32.TryParse(t.Text, out numeros[i++]))
@@ -69,22 +74,26 @@ namespace ClientGestor
                     return erro;
             }
 
+            // Verificar se números estão entre 1 e 50, e estrelas entre 1 e 12
             if (numeros.Max() > 50 || numeros.Min() < 1 || estrelas.Max() > 12 || estrelas.Min() < 1)
             {
                 return erro;
             }
+
+            // Ordenar números e estrelas
             Array.Sort(numeros);
             Array.Sort(estrelas);
 
+            // Verificar se números e estrelas são diferentes
             for (i = 0; i < numeros.Length - 1; i++)
             {
                 if (numeros[i] == numeros[i + 1])
                     return erro;
             }
-
             if (estrelas[0] == estrelas[1])
                 return erro;
 
+            // concatenar números e estrelas numa única string para enviar para o servidor
             string chaveOrdenada = string.Join(" ", numeros);
             string estrelasOrdenada = string.Join(" ", estrelas);
             string chave = chaveOrdenada + " + " + estrelasOrdenada;

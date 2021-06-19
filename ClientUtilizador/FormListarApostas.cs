@@ -12,18 +12,21 @@ namespace ClientUtilizador
 
             try
             {
+                // enviar nome do utilizador para o servidor
+                // no pedido de lista de apostas
                 var client = new Apostas.ApostasClient(channel);
                 var reply = client.ListarApostas(new PedidoListaApostas { Nome = userName });
 
+                // Apresentar a lista de apostas do utilizador
                 foreach (var r in reply.Aposta)
                 {
                     listViewApostas.Items.Add(new ListViewItem(new[] { r.Nome, r.Chave, r.Data }));
                 }
             }
-            catch (RpcException e)
+            catch (RpcException)
             {
-                MessageBox.Show(e.ToString());
-                MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde ou contacte o administrador do serviço.",
+                MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde " +
+                                "ou contacte o administrador do serviço.",
                     "Erro no serviço gRPC", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

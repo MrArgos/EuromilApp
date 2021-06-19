@@ -14,6 +14,7 @@ namespace ClientUtilizador
         {
             InitializeComponent();
 
+            // Criar o canal Grpc para ligação ao servidor
             try
             {
                 var httpHandler = new HttpClientHandler();
@@ -24,15 +25,18 @@ namespace ClientUtilizador
             }
             catch (RpcException)
             {
-                MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde ou contacte o administrador do serviço.",
+                MessageBox.Show("Erro no serviço gRPC. Por favor tente de novo mais tarde " +
+                                "ou contacte o administrador do serviço.",
                                     "Erro no serviço gRPC", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void buttonEntrar_Click(object sender, EventArgs e)
         {
+            // Verificar tamanho do nome inserido
             if (textBoxNome.Text.Length >= 3 || textBoxNome.Text.Length < 50)
             {
+                // Abrir janela do menu do Cliente Utilizador
                 Hide();
                 using (FormMenu fm = new FormMenu(textBoxNome.Text, channel))
                     fm.ShowDialog();

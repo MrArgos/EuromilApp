@@ -16,6 +16,7 @@ namespace ClientUtilizador
             channel = _channel;
         }
 
+        // Abrir janela para Registar uma Aposta
         private void buttonApostar_Click(object sender, EventArgs e)
         {
             Hide();
@@ -24,6 +25,7 @@ namespace ClientUtilizador
             Show();
         }
 
+        // Abrir janela para ver Lista de Apostas do Utilizador
         private void buttonListarApostas_Click(object sender, EventArgs e)
         {
             Hide();
