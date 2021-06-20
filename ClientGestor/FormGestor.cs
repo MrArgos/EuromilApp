@@ -19,7 +19,7 @@ namespace ClientGestor
                 var httpHandler = new HttpClientHandler();
                 httpHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                channel = GrpcChannel.ForAddress("https://192.168.1.93:5001",
+                channel = GrpcChannel.ForAddress("https://25.91.141.24:5001",
                     new GrpcChannelOptions { HttpHandler = httpHandler });
             }
             catch (RpcException)

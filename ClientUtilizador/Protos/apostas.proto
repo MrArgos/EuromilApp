@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "ClientUser";
+option csharp_namespace = "ClientUtilizador";
 
 service Apostas{
     // Utilizador
